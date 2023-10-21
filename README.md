@@ -24,18 +24,85 @@ Another aspect is that the data set should be formatted in such a way that more 
 
 
 ## ALGORITHM:
-Importing the libraries
-Importing the dataset
-Taking care of missing data
-Encoding categorical data
-Normalizing the data
-Splitting the data into test and train
+1.Importing the libraries
+2.Importing the dataset
+3.Taking care of missing data
+4.Encoding categorical data
+5.Normalizing the data
+6.Splitting the data into test and train
 
 ## PROGRAM:
-/Write your code here/
+import pandas as pd
+import io
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+#read the dataset
+df=pd.read_csv('Churn_Modelling data.csv')
+df
+#drop unwanted columns
+df.drop('RowNumber',axis=1,inplace=True)
+df.drop('CustomerId',axis=1,inplace=True)
+df.drop('Surname',axis=1,inplace=True)
+df.drop('Geography',axis=1,inplace=True)
+df.drop('Age',axis=1,inplace=True)
+df.drop('Gender',axis=1,inplace=True)
+df
+#checking for null, duplicates, outliers in lasrt column
+df.isnull().sum()
 
+df.duplicated()
+
+df['Exited'].describe()
+#normalising data to normal distribution
+sc=MinMaxScaler()
+df2=pd.DataFrame(sc.fit_transform(df),columns=['CreditScore','Tenure','Balance',
+'NumOfProducts','HasCrCard','IsActiveMember','EstimatedSalary','Exited'])
+df2
+#split dataset
+x=df2.iloc[:,:-1].values #all rows from all except last column
+x
+y=df2.iloc[:,-1].values #all rows from only last column
+y
+##creating training and test data
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+print(X_train)
+print("Size of X_train: ",len(X_train))
+print(X_test)
+print("Size of X_test: ",len(X_test))
 ## OUTPUT:
-/ Show the result/
+
+DATASETS AND ITS PROPERTIES:
+
+![image](https://github.com/MUKESHPARTHASARATHY/Ex.No.1---Data-Preprocessing/assets/119393818/4ad81ba6-1687-420f-b821-8b23852ce90f)
+
+![image](https://github.com/MUKESHPARTHASARATHY/Ex.No.1---Data-Preprocessing/assets/119393818/f109cbd6-cbb3-4c4b-95fd-231de3a04d66)
+
+![image](https://github.com/MUKESHPARTHASARATHY/Ex.No.1---Data-Preprocessing/assets/119393818/ad135685-2d3d-4727-8790-98b0cdd9c8b8)
+
+![image](https://github.com/MUKESHPARTHASARATHY/Ex.No.1---Data-Preprocessing/assets/119393818/08a57ba8-a900-42e1-b9ec-131459313485)
+
+![image](https://github.com/MUKESHPARTHASARATHY/Ex.No.1---Data-Preprocessing/assets/119393818/62f29f40-68f1-4b44-8874-32310fb300fd)
+
+NORMALISED DATASET:
+
+![image](https://github.com/MUKESHPARTHASARATHY/Ex.No.1---Data-Preprocessing/assets/119393818/5d8d2d65-1572-4c62-8507-085fae550361)
+
+X AND Y COLOUMN DATA:
+
+![image](https://github.com/MUKESHPARTHASARATHY/Ex.No.1---Data-Preprocessing/assets/119393818/8468dee9-a151-410c-8026-5ac73b5bcc69)
+
+![image](https://github.com/MUKESHPARTHASARATHY/Ex.No.1---Data-Preprocessing/assets/119393818/97bc7a97-abc6-4d12-9907-fdf8eb2daa6f)
+
+TRAINING DATA:
+
+![image](https://github.com/MUKESHPARTHASARATHY/Ex.No.1---Data-Preprocessing/assets/119393818/ce13e36e-c9ac-41e9-898d-956fa7c8947c)
+
+TEST DATA:
+
+![image](https://github.com/MUKESHPARTHASARATHY/Ex.No.1---Data-Preprocessing/assets/119393818/e802f748-bde5-4f78-b6f1-281760d58495)
+
 
 ## RESULT
-/Type your result here/
+
+Thus, the Data preprocessing is performed over a data set successfully.
